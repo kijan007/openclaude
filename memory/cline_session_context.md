@@ -22,3 +22,6 @@
 - Dateien: src/constants/brand.ts, src/components/StartupScreen.ts, package.json, bin/openclaude-build.sh
 - Ergebnis: Rebrand-Code fertig. Naechster Schritt: build, npm pack, global install als kijanclaude (Settings geteilt: nutzt ~/.openclaude bzw. ~/.config - teilt Ordner mit Original).
 - Naechstes: commit -> build -> npm i -g tarball -> smoke kijanclaude --version
+- Aktion (Fortsetzung): gebaut + global installiert. now kijanclaude -> bin/openclaude (shared dist/cli.mjs). Original openclaude blieb erhalten.
+- Ergebnis: kijanclaude --version = 0.30.0; Logo KIJANCLAUDE im dist-Bundle.
+- Naechstes: optional --version-String 'OpenClaude' auf KijanClaude umstellen (Quelle: produkt/version label, nicht Logo). Settings geteilt (gleiche dist/config), NICHT separat.
