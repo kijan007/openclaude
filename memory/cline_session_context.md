@@ -25,3 +25,9 @@
 - Aktion (Fortsetzung): gebaut + global installiert. now kijanclaude -> bin/openclaude (shared dist/cli.mjs). Original openclaude blieb erhalten.
 - Ergebnis: kijanclaude --version = 0.30.0; Logo KIJANCLAUDE im dist-Bundle.
 - Naechstes: optional --version-String 'OpenClaude' auf KijanClaude umstellen (Quelle: produkt/version label, nicht Logo). Settings geteilt (gleiche dist/config), NICHT separat.
+
+## [13:15] - J-Buchstabe im Logo fixen
+- Aktion: LOGO_KIJAN J neu gezeichnet: klar oberer Balken █████╗ + rechtsbundiger Schaft ██║ + unterer Balken █████╝ (war vorher C-artig).
+- Dateien: src/components/StartupScreen.ts
+- Ergebnis: Verifiziert im installierten Bundle (█████╝ vorhanden). Build+install+commit ok.
+- Naechstes: --version-Displaylabel kijanclaude -> 'KijanClaude' (optional separater Fix)
