@@ -47,3 +47,7 @@
 - Fix: PATH-Login-Launcher in ~/.local/bin erzeugt (nvm-node bevorzugt), .bashrc-PATH-Zeile. Alle 6 Hosts verifiziert (0.30.0). Deploy-Skript erzeugt Wrapper kuenftig automatisch.
 - Dateien: bin/openclaude-build.sh
 - Naechstes: commit + optional push.
+
+## [16:22] - kijanclaude PATH-Fix abgeschlossen
+- Root-Ursache deploy-fail: `nv=... | sort -V | tail -1` unter `set -euo pipefail` bei fehlendem nvm (hx/boexli/krypto/private/aimax). Fix: `|| true`; Launcher via base64 (kein nested heredoc). Deploy-Skript erzeugt jetzt automatisch PATH-Launcher + .bashrc-Zeile.
+- Ergebnis: alle 6 remote hosts reproduzierbar auf 0.30.0 (Wrapper auto). Local aimax ok. commits 4352cb63, c6fdad68.
