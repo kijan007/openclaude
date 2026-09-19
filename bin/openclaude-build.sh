@@ -147,9 +147,27 @@ deploy_one() {
     export npm_config_prefix="$HOME/.npm-global"
     npm install -g --prefix "$npm_config_prefix" "$tgz" >/tmp/openclaude-install.log 2>&1 \
       || { tail -20 /tmp/openclaude-install.log; exit 1; }
-    export PATH="$npm_config_prefix/bin:$PATH"
+
+    # Ensure a PATH-visible launcher that prefers the newest nvm node, so the
+    # executable stays callable across shells even where system node is <22 or
+    # missing (nvm node may not be on a fresh PATH).
+    for d in "$HOME/.local/bin" "$HOME/bin"; do
+      if printf '%s' ":$PATH:" | grep -qF ":$d:"; then BIN="$d"; break; fi
+    done
+    BIN="${BIN:-$HOME/.local/bin}"
+    mkdir -p "$BIN"
+    cat > "$BIN/kijanclaude" <<'LAUNCH'
+#!/usr/bin/env bash
+NV="$(ls -d "$HOME"/.nvm/versions/node/v* 2>/dev/null | sort -V | tail -1)"
+[ -n "$NV" ] && export PATH="$NV/bin:$PATH"
+exec node "$HOME/.npm-global/lib/node_modules/@kijan007/openclaude/dist/cli.mjs" "$@"
+LAUNCH
+    chmod +x "$BIN/kijanclaude"
+    # persist PATH entry for new login shells
+    grep -qF "$BIN" "$HOME/.bashrc" 2>/dev/null || echo "export PATH=\"$BIN:\$PATH\"" >> "$HOME/.bashrc"
+
     echo ">> kijanclaude --version"
-    kijanclaude --version || true
+    "$BIN/kijanclaude" --version || true
     rm -f "$tgz"
     echo "OK v$version"
 REMOTE

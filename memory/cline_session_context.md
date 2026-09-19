@@ -41,3 +41,9 @@
 - Aktion: ociweb (OracleLinux9, opc, system-node v16) -> nvm + node v24.21.0 LTS installiert. Deploy-Skript bevorzugt nun neueste nvm-node.
 - Dateien: bin/openclaude-build.sh
 - Ergebnis: alle 7 hosts auf v0.30.0 (hx,boexli,krypto,private,faex,ociweb,aimax(hier)). commit dd61063a.
+
+## [14:05] - kijanclaude nicht im PATH auf hosts
+- Ursache: npm install -g --prefix ~/.npm-global -> bin dort, aber ~/.npm-global/bin nicht im PATH; zusaetzlich ociweb system-node v16/faex kein node -> Wrapper (exec node) crashte.
+- Fix: PATH-Login-Launcher in ~/.local/bin erzeugt (nvm-node bevorzugt), .bashrc-PATH-Zeile. Alle 6 Hosts verifiziert (0.30.0). Deploy-Skript erzeugt Wrapper kuenftig automatisch.
+- Dateien: bin/openclaude-build.sh
+- Naechstes: commit + optional push.
