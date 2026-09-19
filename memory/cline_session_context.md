@@ -10,3 +10,9 @@
 - Dateien: bin/openclaude-build.sh
 - Ergebnis: Syntax OK; combined getestet (v0.30.0 -> gitlawb-openclaude-0.30.0.tgz); distribute-Fehlerpfad sauber. Scoped-pkgname via get_pkgname geloest (@scope/name->scope-name).
 - Naechstes: bin/compile.sh als compile-only bleibt; openclaude-build.sh ist die All-in-one Variante.
+
+## [12:57] - Artefaktname @kijan007
+- Aktion: package.json name @gitlawb/openclaude -> @kijan007/openclaude. Tarball folgt automatisch (get_pkgname).
+- Dateien: package.json
+- Ergebnis: Build produzierte kijan007-openclaude-0.30.0.tgz (verifiziert).
+- Naechstes: scripts/* (PACKAGE_URL) und Source-Quellen tragen weiterhin gitlawb - separater Task falls gewuenscht.
