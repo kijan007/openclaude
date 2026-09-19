@@ -16,3 +16,9 @@
 - Dateien: package.json
 - Ergebnis: Build produzierte kijan007-openclaude-0.30.0.tgz (verifiziert).
 - Naechstes: scripts/* (PACKAGE_URL) und Source-Quellen tragen weiterhin gitlawb - separater Task falls gewuenscht.
+
+## [13:10] - Rebrand KijanClaude (Logo + Executable)
+- Aktion: BRAND_NAME OpenClaude->KijanClaude; Wordmark OPEN->KIJAN; Startup-Logo LOGO_OPEN->LOGO_KIJAN (KIJANCLAUDE figlet); package.json bin openclaude->kijanclaude; openclaude-build.sh deploy smoke ->kijanclaude.
+- Dateien: src/constants/brand.ts, src/components/StartupScreen.ts, package.json, bin/openclaude-build.sh
+- Ergebnis: Rebrand-Code fertig. Naechster Schritt: build, npm pack, global install als kijanclaude (Settings geteilt: nutzt ~/.openclaude bzw. ~/.config - teilt Ordner mit Original).
+- Naechstes: commit -> build -> npm i -g tarball -> smoke kijanclaude --version

@@ -142,8 +142,8 @@ deploy_one() {
     echo ">> npm install -g $tgz"
     npm install -g "$tgz" >/tmp/openclaude-install.log 2>&1 \
       || { tail -20 /tmp/openclaude-install.log; exit 1; }
-    echo ">> openclaude --version"
-    openclaude --version || true
+    echo ">> kijanclaude --version"
+    kijanclaude --version || true
     rm -f "$tgz"
     echo "OK v$version"
 REMOTE

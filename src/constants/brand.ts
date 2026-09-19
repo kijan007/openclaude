@@ -7,7 +7,7 @@
  * parses theme values with `parseRGB`, which only matches `rgb(...)` strings.
  */
 
-export const BRAND_NAME = 'OpenClaude'
+export const BRAND_NAME = 'KijanClaude'
 
 export const BRAND_TAGLINE = 'Open terminal for any LLM'
 
@@ -19,11 +19,11 @@ export const BRAND_ACCENT_RGB = 'rgb(255,122,26)'
  * accent shades. Letter-spaced caps flanked by shade-gradient accents
  * (░ ▒ ▓ █ render correctly in Apple Terminal). Rendered as one centered row:
  *
- *   ░▒▓█ O P E N C L A U D E █▓▒░
+ *   ░▒▓█ K I J A N C L A U D E █▓▒░
  */
 export const WORDMARK_ACCENT_LEFT = '░▒▓█'
 
-export const WORDMARK_OPEN = 'O P E N'
+export const WORDMARK_OPEN = 'K I J A N'
 
 export const WORDMARK_CLAUDE = 'C L A U D E'
 
