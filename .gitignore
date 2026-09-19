@@ -25,3 +25,5 @@ plan/
 .tmp
 .tmp-*
 temp_reference/
+logs/**
+logs/
