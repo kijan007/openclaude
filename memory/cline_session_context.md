@@ -31,3 +31,8 @@
 - Dateien: src/components/StartupScreen.ts
 - Ergebnis: Verifiziert im installierten Bundle (█████╝ vorhanden). Build+install+commit ok.
 - Naechstes: --version-Displaylabel kijanclaude -> 'KijanClaude' (optional separater Fix)
+
+## [13:19] - I-J Luecke verkleinern
+- Aktion: LOGO_KIJAN auf natuerliche Buchstabenbreiten umgestellt (nicht mehr 8er-Padding alle), einheitliche 2-Space-Luecken; I-J-Luecke nun eng.
+- Dateien: src/components/StartupScreen.ts
+- Ergebnis: neuer build+install als kijanclaude; Rendering geprueft.
