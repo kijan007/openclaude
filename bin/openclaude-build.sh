@@ -134,6 +134,11 @@ deploy_one() {
     <<'REMOTE' || { log "  x install failed on $host"; return 1; }
     set -euo pipefail
     version="$1"; tgz="$2"
+    # If node isn't on PATH, find it under nvm (~/.nvm/versions/node/*).
+    if ! command -v node >/dev/null 2>&1; then
+      nv="$(ls -d "$HOME"/.nvm/versions/node/v* 2>/dev/null | sort -V | tail -1)"
+      [ -n "$nv" ] && export PATH="$nv/bin:$PATH"
+    fi
     node_major="$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)"
     if [ "${node_major:-0}" -lt 22 ]; then
       echo "ERROR: node >=22 required, found $(node -v 2>/dev/null || echo 'none')"
