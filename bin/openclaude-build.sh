@@ -139,9 +139,11 @@ deploy_one() {
       echo "ERROR: node >=22 required, found $(node -v 2>/dev/null || echo 'none')"
       exit 1
     fi
-    echo ">> npm install -g $tgz"
-    npm install -g "$tgz" >/tmp/openclaude-install.log 2>&1 \
+    echo ">> npm install -g $tgz  (prefix ~/.npm-global)"
+    export npm_config_prefix="$HOME/.npm-global"
+    npm install -g --prefix "$npm_config_prefix" "$tgz" >/tmp/openclaude-install.log 2>&1 \
       || { tail -20 /tmp/openclaude-install.log; exit 1; }
+    export PATH="$npm_config_prefix/bin:$PATH"
     echo ">> kijanclaude --version"
     kijanclaude --version || true
     rm -f "$tgz"
