@@ -136,7 +136,7 @@ deploy_one() {
     version="$1"; tgz="$2"
     # Prefer the newest nvm-managed node (>=22) over any older system node,
     # since system node may be v16 which fails the engines gate.
-    nv="$(ls -d "$HOME"/.nvm/versions/node/v* 2>/dev/null | sort -V | tail -1)"
+    nv="$(ls -d "$HOME"/.nvm/versions/node/v* 2>/dev/null | sort -V | tail -1 || true)"
     [ -n "$nv" ] && export PATH="$nv/bin:$PATH"
     node_major="$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)"
     if [ "${node_major:-0}" -lt 22 ]; then
@@ -156,12 +156,9 @@ deploy_one() {
     done
     BIN="${BIN:-$HOME/.local/bin}"
     mkdir -p "$BIN"
-    cat > "$BIN/kijanclaude" <<'LAUNCH'
-#!/usr/bin/env bash
-NV="$(ls -d "$HOME"/.nvm/versions/node/v* 2>/dev/null | sort -V | tail -1)"
-[ -n "$NV" ] && export PATH="$NV/bin:$PATH"
-exec node "$HOME/.npm-global/lib/node_modules/@kijan007/openclaude/dist/cli.mjs" "$@"
-LAUNCH
+    # Launcher written via base64 to avoid a nested heredoc clashing with the
+    # outer REMOTE heredoc over stdin.
+    printf '%s' 'IyEvdXNyL2Jpbi9lbnYgYmFzaApOVj0iJChscyAtZCAiJEhPTUUiLy5udm0vdmVyc2lvbnMvbm9kZS92KiAyPi9kZXYvbnVsbCB8IHNvcnQgLVYgfCB0YWlsIC0xKSIKWyAtbiAiJE5WIiBdICYmIGV4cG9ydCBQQVRIPSIkTlYvYmluOiRQQVRIIgpleGVjIG5vZGUgIiRIT01FLy5ucG0tZ2xvYmFsL2xpYi9ub2RlX21vZHVsZXMvQGtpamFuMDA3L29wZW5jbGF1ZGUvZGlzdC9jbGkubWpzIiAiJEAiCg==' | base64 -d > "$BIN/kijanclaude"
     chmod +x "$BIN/kijanclaude"
     # persist PATH entry for new login shells
     grep -qF "$BIN" "$HOME/.bashrc" 2>/dev/null || echo "export PATH=\"$BIN:\$PATH\"" >> "$HOME/.bashrc"
