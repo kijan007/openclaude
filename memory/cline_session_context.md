@@ -36,3 +36,8 @@
 - Aktion: LOGO_KIJAN auf natuerliche Buchstabenbreiten umgestellt (nicht mehr 8er-Padding alle), einheitliche 2-Space-Luecken; I-J-Luecke nun eng.
 - Dateien: src/components/StartupScreen.ts
 - Ergebnis: neuer build+install als kijanclaude; Rendering geprueft.
+
+## [13:50] - ociweb Node installieren + verteilen
+- Aktion: ociweb (OracleLinux9, opc, system-node v16) -> nvm + node v24.21.0 LTS installiert. Deploy-Skript bevorzugt nun neueste nvm-node.
+- Dateien: bin/openclaude-build.sh
+- Ergebnis: alle 7 hosts auf v0.30.0 (hx,boexli,krypto,private,faex,ociweb,aimax(hier)). commit dd61063a.
