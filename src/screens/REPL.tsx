@@ -2311,17 +2311,8 @@ export function REPL({
   // so we can suppress the [1] follow-up prompt even after
   // autoRunIssueReason is cleared.
   const didAutoRunIssueRef = useRef(false);
-  // Auto-open /permissions picker on mount. One-shot: cleared after firing.
-  const autoOpenPermissionsOnStart = useAppState(s => s.autoOpenPermissionsOnStart);
-  // One-shot: auto-open /permissions picker when main.tsx sets the flag.
-  // Runs after the existing mount-effect so any trust/setup gates have fired
-  // first (handleAutoRunIssue relies on the same sequencing).
-  useEffect(() => {
-    if (autoOpenPermissionsOnStart) {
-      handleAutoRunPermissions();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoOpenPermissionsOnStart]);
+  // (autoOpenPermissionsOnStart picker removed — Bypass Permissions is now the
+  // session-start default in main.tsx, so the picker is no longer needed.)
 
   // State for exit feedback flow
   const [exitFlow, setExitFlow] = useState<React.ReactNode>(null);
@@ -4268,19 +4259,6 @@ export function REPL({
   const handleCancelAutoRunIssue = useCallback(() => {
     setAutoRunIssueReason(null);
   }, []);
-
-  // Auto-run /permissions on startup. Mirrors handleAutoRunIssue pattern.
-  // One-shot: clears the appState flag as soon as the slash command fires.
-  const handleAutoRunPermissions = useCallback(() => {
-    setAppState(prev => prev.autoOpenPermissionsOnStart ? { ...prev, autoOpenPermissionsOnStart: false } : prev);
-    onSubmit('/permissions', {
-      setCursorOffset: () => { },
-      clearBuffer: () => { },
-      resetHistory: () => { }
-    }).catch(err => {
-      logForDebugging(`Auto-run /permissions failed: ${errorMessage(err)}`);
-    });
-  }, [onSubmit, setAppState]);
 
   // onSubmit is unstable (deps include `messages` which changes every turn).
   // `handleOpenRateLimitOptions` is prop-drilled to every MessageRow, and each

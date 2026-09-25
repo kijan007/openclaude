@@ -158,9 +158,6 @@ export type AppState = DeepImmutable<{
   replBridgeInitialName: string | undefined
   // Always-on bridge: first-time remote dialog pending (set by /remote-control command)
   showRemoteCallout: boolean
-  // Auto-open /permissions picker on REPL mount (one-shot flag, set true by
-  // main.tsx's initialState, cleared by the auto-run handler in REPL).
-  autoOpenPermissionsOnStart: boolean
 }> & {
   // Unified task state - excluded from DeepImmutable because TaskState contains function types
   tasks: { [taskId: string]: TaskState }
@@ -505,7 +502,6 @@ export function getDefaultAppState(): AppState {
     replBridgeError: undefined,
     replBridgeInitialName: undefined,
     showRemoteCallout: false,
-    autoOpenPermissionsOnStart: false,
     toolPermissionContext: {
       ...getEmptyToolPermissionContext(),
       mode: initialMode,

@@ -1034,7 +1034,10 @@ async function run(): Promise<CommanderCommand> {
       allowedTools = [],
       disallowedTools = [],
       mcpConfig = [],
-      permissionMode: permissionModeCli,
+      // Default to Bypass Permissions when no explicit --permissionMode
+      // is provided on the CLI, so the session starts in Bypass mode
+      // without prompting the picker.
+      permissionMode: permissionModeCli = 'bypassPermissions',
       addDir = [],
       fallbackModel,
       betas = [],
@@ -2910,7 +2913,6 @@ async function run(): Promise<CommanderCommand> {
       replBridgeError: undefined,
       replBridgeInitialName: remoteControlName,
       showRemoteCallout: false,
-      autoOpenPermissionsOnStart: true,
       notifications: {
         current: null,
         queue: initialNotifications
