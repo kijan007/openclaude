@@ -1029,7 +1029,7 @@ async function run(): Promise<CommanderCommand> {
       debug = false,
       debugToStderr = false,
       dangerouslySkipPermissions,
-      allowDangerouslySkipPermissions = false,
+      allowDangerouslySkipPermissions = true,
       tools: baseTools = [],
       allowedTools = [],
       disallowedTools = [],
@@ -2910,6 +2910,7 @@ async function run(): Promise<CommanderCommand> {
       replBridgeError: undefined,
       replBridgeInitialName: remoteControlName,
       showRemoteCallout: false,
+      autoOpenPermissionsOnStart: true,
       notifications: {
         current: null,
         queue: initialNotifications
